@@ -10,7 +10,15 @@ const BuildControls = (props) => {
         { label: 'CHEESE', type: 'cheese'}
     ]
     return (<div className={classes.BuildControls}>
-        {controls.map(it => <BuildControl key={it.type} label={it.label} adder={() => props.addIngredient(it.type)} remover={() => props.removeIngredient(it.type)} disabledInfo={props.disabledInfo[it.type]}/>)}
+        <p>Total Price : <strong>{props.price.toFixed(2)}</strong></p>
+        {controls.map(it => <BuildControl
+                                key={it.type} label={it.label} 
+                                adder={() => props.addIngredient(it.type)}
+                                remover={() => props.removeIngredient(it.type)}
+                                disabledInfo={props.disabledInfo[it.type]}
+                            />
+                        )}
+        <button className={classes.OrderButton} disabled={!props.orderEnabled}>ORDER NOW</button>
     </div>);
 }
 
