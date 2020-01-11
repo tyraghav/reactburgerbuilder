@@ -62,7 +62,7 @@ class BurgerBuilder extends Component{
     }
     
     purchaseConfirmHandler = () => {
-        const myOrder = {
+        /*const myOrder = {
             ingredients: this.state.ingredients,
             price: this.state.totalPrice
         }
@@ -74,6 +74,15 @@ class BurgerBuilder extends Component{
             }).catch(Error => {
                 this.setState({loading:false,
                     purchasing: false});
+            });*/
+            const queryParams = [];
+            for (let i in this.state.ingredients){
+                queryParams.push(encodeURIComponent(i)+'='+encodeURIComponent(this.state.ingredients[i]));
+            }
+            const queryString = queryParams.join('&');
+            this.props.history.push({
+                pathname: '/checkout',
+                search: '?'+queryString+'&price='+this.state.totalPrice
             });
     }
 
@@ -88,7 +97,7 @@ class BurgerBuilder extends Component{
 
     render(){
         const disabledInfo = {...this.state.ingredients};
-        let burger = (<Auxillary><Burger ingredients={this.state.ingredients}></Burger>
+        let burger = (<Auxillary><Burger ingredients={this.state.ingredients} />
             <BuildControls 
                 addIngredient={this.addIngredientHandler}
                 removeIngredient={this.removeIngredientHandler}
