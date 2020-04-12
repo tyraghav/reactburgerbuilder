@@ -3,10 +3,10 @@ import { connect } from 'react-redux';
 import classes from './CheckOut.module.css';
 import CheckOutSummary from '../../Component/Order/CheckOutSummary/CheckOutSummary';
 import ContactData from './ContactData/ContactData';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 class CheckOut extends Component {
-    
+
     componentDidMount(){
         /*const ingredients = {};
         let price = null;
@@ -30,20 +30,25 @@ class CheckOut extends Component {
     }
     
     render() {
-        return (
-            <div className={classes.CheckOut}>
+        let summary = <Redirect to='/'/>
+        if(this.props.ings){
+            let purchasedRedirect = this.props.purchased?<Redirect to='/'/>:null;
+            summary = <div className={classes.CheckOut}>
+                {purchasedRedirect}
                 <CheckOutSummary ingredients={this.props.ings}
                 cancel={this.checkOutCancelHandler} confirm={this.checkOutConfirmHandler}/>
                 <Route path='/checkout/contact' component={ContactData}/>
             </div>
-        )
+        }
+        return summary;
     }
 }
 
 const mapStateToProps = state => {
     return {
-        ings: state.ingredients,
-        price: state.totalPrice
+        ings: state.burgerBuilder.ingredients,
+        price: state.burgerBuilder.totalPrice,
+        purchased: state.order.purchased
     }
 }
 
