@@ -8,6 +8,7 @@ import { createStore, compose, applyMiddleware, combineReducers } from 'redux';
 import { Provider } from 'react-redux';
 import BurgerBuilderReducer from './store/reducers/burgerBuilder';
 import OrderReducer from './store/reducers/order';
+import AuthReducer from './store/reducers/auth';
 import thunk from 'redux-thunk';
 
 const logger = store => {
@@ -23,7 +24,8 @@ const logger = store => {
 
 const rootReducer = combineReducers({
     burgerBuilder : BurgerBuilderReducer,
-    order : OrderReducer
+    order : OrderReducer,
+    auth : AuthReducer
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose ;

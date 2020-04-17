@@ -29,7 +29,7 @@ export const setIngredients = (ingredients) => {
 }
 
 export const initIngredients = () => {
-    return dispatch => AxiosInstance.get('/ingredients.json')
+    return dispatch => AxiosInstance.get('/Ingredients.json')
             .then(response => {
                 dispatch(setIngredients(response.data));
             }).catch(error => {
