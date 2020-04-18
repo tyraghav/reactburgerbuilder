@@ -6,6 +6,6 @@
 
 @media(min-width: 600px) {
     .CheckOutSummary {
-        width: 500px;
+        width: 80%;
     }
 }

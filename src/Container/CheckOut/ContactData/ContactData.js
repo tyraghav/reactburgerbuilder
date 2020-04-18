@@ -8,6 +8,7 @@ import AxiosInstance from '../../../AxiosInstance';
 import Input from '../../../Component/UI/Input/Input';
 import * as actions from '../../../store/actions/index';
 import WithErrorHandler from '../../../HOC/WithErrorHandler/WithErrorHandler';
+import { isValidChecker } from '../../../store/utility';
 
 class ContactData extends Component {
     /*state = {
@@ -107,19 +108,6 @@ class ContactData extends Component {
         formIsValid : false
     }
 
-    isValidChecker = (myValue,rules) => {
-        let isValid = true;
-        if(rules.required){
-            isValid = myValue.trim()!=='' && isValid;
-        }
-        if(rules.minLength){
-            isValid = myValue.length >= rules.minLength && isValid;
-        }
-        if(rules.maxLength){
-            isValid = myValue.length <= rules.maxLength && isValid;
-        }
-        return isValid;
-    }
 
     inputOnChangeHandler = (event,inputId) => {
         let myFormIsValid = true;
@@ -127,7 +115,7 @@ class ContactData extends Component {
         const inputEl = {...myForm[inputId]};
         inputEl.value = event.target.value;
         inputEl.touched = true;
-        inputEl.valid = this.isValidChecker(inputEl.value,inputEl.validation);
+        inputEl.valid = isValidChecker(inputEl.value,inputEl.validation);
         myForm[inputId] = inputEl;
         for(let inputId in myForm){
             myFormIsValid = myForm[inputId].valid && myFormIsValid;

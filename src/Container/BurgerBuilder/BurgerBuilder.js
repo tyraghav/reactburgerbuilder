@@ -11,7 +11,7 @@ import AxiosInstance from '../../AxiosInstance';
 import Spinner from '../../Component/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
 
-class BurgerBuilder extends Component{
+export class BurgerBuilder extends Component{
 
     state = {
         purchasable : false,

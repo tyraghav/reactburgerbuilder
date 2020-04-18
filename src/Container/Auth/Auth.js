@@ -7,6 +7,7 @@ import Button from '../../Component/UI/Button/Button';
 import Spinner from '../../Component/UI/Spinner/Spinner';
 import * as actions from '../../store/actions/index';
 import { Redirect } from 'react-router-dom';
+import { isValidChecker } from '../../store/utility';
 
 class Auth extends Component{
     state = {
@@ -43,27 +44,13 @@ class Auth extends Component{
         isSignUp : true
     }
 
-    isValidChecker = (myValue,rules) => {
-        let isValid = true;
-        if(rules.required){
-            isValid = myValue.trim()!=='' && isValid;
-        }
-        if(rules.minLength){
-            isValid = myValue.length >= rules.minLength && isValid;
-        }
-        if(rules.maxLength){
-            isValid = myValue.length <= rules.maxLength && isValid;
-        }
-        return isValid;
-    }
-
     inputOnChangeHandler = (event,inputId) => {
         let myFormIsValid = true;
         const myForm = {...this.state.authForm};
         const inputEl = {...myForm[inputId]};
         inputEl.value = event.target.value;
         inputEl.touched = true;
-        inputEl.valid = this.isValidChecker(inputEl.value,inputEl.validation);
+        inputEl.valid = isValidChecker(inputEl.value,inputEl.validation);
         myForm[inputId] = inputEl;
         for(let inputId in myForm){
             myFormIsValid = myForm[inputId].valid && myFormIsValid;

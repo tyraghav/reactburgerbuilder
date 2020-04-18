@@ -15,7 +15,7 @@ const SideDrawer = props => {
     return (
     <Auxillary>
         <Backdrop show={props.open} clicked={props.clickedBackdrop}/>
-        <div className={sideDrawerClass}>
+        <div className={sideDrawerClass} onClick={props.clickedBackdrop}>
             <div className={classes.Logo}>
                 <Logo/>
             </div>
